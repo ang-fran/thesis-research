@@ -1,1 +1,1 @@
-# thesis-research
+# Thesis Research
