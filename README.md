@@ -37,7 +37,7 @@ See [`data/README.md`](data/README.md) for variable descriptions and how to obta
 | `R/data_prep.R` | Loading, cleaning, and visualizing raw data |
 | `R/var_vecm.R` | VAR and VECM estimation, diagnostics, forecasting |
 | `R/msvar.R` | Regime-switching estimation using MSMAHVAR package |
-| `outputs/figures/` | All generated plots |
+| `figures/` | All generated plots |
 
 ---
 
