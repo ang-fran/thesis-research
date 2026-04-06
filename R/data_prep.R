@@ -16,25 +16,54 @@ mydata = mydata %>%
 colSums(is.na(mydata))
 str(mydata)
 
-# Time series plot of all variables
-mydata %>%
+# ---- Plot 1: All variables over time ----
+p1 = mydata %>%
   pivot_longer(-date) %>%
   ggplot(aes(date, value)) +
   geom_line() +
   facet_wrap(~name, scales = "free") +
-  theme_minimal()
+  theme_minimal() +
+  labs(
+    title    = "Macroeconomic Variables Over Time",
+    subtitle = "Quarterly data — raw series before transformation",
+    x        = "Date",
+    y        = "Value"
+  )
 
-# Select and scale variables for modeling
-# Columns 2, 3, 5, 7, 9 — proportions divided by 100 where applicable
+ggsave(
+  filename = "figures/01_all_variables_raw.png",
+  plot     = p1,
+  width    = 12,
+  height   = 8,
+  dpi      = 150
+)
+
+# ---- Select and scale variables for modeling ----
+# Columns 2, 3, 5, 7, 9 selected for analysis
+# Columns 1, 3, 4 of Y are proportions — divided by 100 to express as decimals
 Y = mydata[, c(2, 3, 5, 7, 9)]
 Y[, c(1, 3, 4)] = Y[, c(1, 3, 4)] / 100
 
-# Overview
-par(mfrow = c(1, 1))
-ts.plot(Y, col = c("salmon", "cyan", "seagreen", "gold", "sienna"))
 print(cor(Y))
 str(Y)
 head(Y)
 
-# Save Y for use in downstream scripts
+# ---- Plot 2: Modelling variables overlaid ----
+png("figures/modeling_variables_overlay.png", width = 1000, height = 600)
+
+ts.plot(Y,
+        col  = c("salmon", "cyan", "seagreen", "gold", "sienna"),
+        main = "Selected Modeling Variables",
+        ylab = "Value",
+        xlab = "Time (quarters)")
+
+legend("topright",
+       legend = colnames(Y),
+       col    = c("salmon", "cyan", "seagreen", "gold", "sienna"),
+       lty    = 1,
+       cex    = 0.8)
+
+dev.off()
+
+# ---- Save Y for downstream scripts ----
 saveRDS(Y, file = "data/Y_clean.rds")
