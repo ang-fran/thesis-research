@@ -10,7 +10,7 @@ Data was collected from the following sources:
 | Variable | Source | Notes |
 |----------|--------|-------|
 | `real.gdp` | [FRED (Federal Reserve Economic Data)](https://fred.stlouisfed.org/series/NGDPRSAXDCCAQ) | Used directly |
-| `cpi` | [FRED (Federal Reserve Economic Data)]((https://fred.stlouisfed.org/series/CANCPALTT01IXOBSAQ)) | Used directly |
+| `cpi` | [FRED (Federal Reserve Economic Data)](https://fred.stlouisfed.org/series/CANCPALTT01IXOBSAQ) | Used directly |
 | `gdp.growth` | Calculated | Derived from `real.gdp` |
 | `inflation.rate` | Calculated | Derived from `cpi` |
 | `mtg.del.rate` | [Canadian Bankers Association (CBA)](https://cba.ca/Assets/CanadianBankersAssociation/Documents/Articles/Statistics/stat-mortgages-arrears-january-2026-en.pdf) | Originally monthly; converted to quarterly |
