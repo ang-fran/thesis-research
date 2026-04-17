@@ -1,6 +1,9 @@
 # ---- Load, clean, and visualize raw data ----
+rm(list = ls())
 library(tidyverse)
 library(zoo)
+library(psych)
+library(xtable)
 
 mydata = read.csv("data/2026 Mar Working Data.csv")
 mydata = mydata[, -c(9:10)]
@@ -64,6 +67,12 @@ legend("topright",
        cex    = 0.8)
 
 dev.off()
+
+# ---- Summary statistics ----
+sum_stats = describe(Y)
+corY = cor(Y)
+print(xtable(sum_stats), type = "latex", file = "tables/sum_stats.tex")
+print(xtable(corY), type = "latex", file = "tables/corY.tex")
 
 # ---- Save Y for downstream scripts ----
 saveRDS(Y, file = "data/Y_clean.rds")
